@@ -1,0 +1,141 @@
+﻿@using teknikServisMVC.APIs.External_Services.Turkey_Province_Service.Service_Client;
+@{
+    ViewData["Title"] = "Yeni Müşteri Ekle";
+    Layout = "~/Views/Shared/PanelLayout.cshtml";
+}
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.0/min/dropzone.min.css">
+
+<style>
+    .dz-preview {
+        border-radius: 20px !important;
+    }
+</style>
+
+<section class="content">
+    <div class="body_scroll">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                    <h2>Yeni Müşteri Kaydı</h2>
+
+                    <button class="btn btn-primary btn-icon mobile_menu" type="button">
+                        <i class="zmdi zmdi-sort-amount-desc"></i>
+                    </button>
+                </div>
+                <div class="col-lg-5 col-md-6 col-sm-12">
+                    <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button">
+                        <i class="zmdi zmdi-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="body">
+                            <form action="/customer/createcustomer" method="POST">
+                                <div class="row clearfix">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="Ad" placeholder="Ad">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="Soyad" placeholder="Soyad">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <div class="input-group masked-input mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="zmdi zmdi-smartphone"></i>
+                                                    </span>
+                                                </div>
+                                                <input type="text" name="TelefonNumarasi" class="form-control mobile-phone-number"
+                                                       placeholder="Tel: +90 (000) 000-00-00">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><div class="row clearfix">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" value="Türkiye" name="Ulke" placeholder="Türkiye" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <select class="form-control show-tick ms select2" name="Sehir" data-placeholder="Şehir">
+                                                <option></option>
+                                                @foreach (var item in ServiceClient.GetProvinces())
+                                                {
+                                                    <option value="@item.Name">@item.Name</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+
+                                            <input type="text" name="PostaKodu" class="form-control"
+                                                   placeholder="Posta Kodu">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+
+                                            <input type="text" name="CaddeAdres" class="form-control"
+                                                   placeholder="Adres">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-4">
+                                        <div class="input-group masked-input mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="zmdi zmdi-email"></i></span>
+                                            </div>
+                                            <input type="text" name="Eposta" class="form-control email"
+                                                   placeholder="Email: örnek@teknikservis.com">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <button type="submit" class="btn btn-block btn-lg btn-info">Müşteri Ekle</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const addButton = document.querySelector(".btn-info"); // Altta bulunan butonun sınıfını kullanarak seçiyoruz
+        const firstForm = document.querySelector("form:first-child"); // İlk formu seçiyoruz
+        const secondForm = document.querySelector("form:nth-child(2)"); // İkinci formu seçiyoruz
+
+        addButton.addEventListener("click", function (e) {
+            e.preventDefault(); // Sayfanın yeniden yüklenmesini engelliyoruz
+            firstForm.submit(); // İlk formu gönderiyoruz
+            // secondForm.submit(); // İkinci formu gönderiyoruz
+        });
+    });
+
+</script>
+
+
+<script src="~/assets/panel/plugins/jquery-inputmask/jquery.inputmask.bundle.js"></script> <!-- Input Mask Plugin Js -->
+<script src="~/assets/panel/plugins/select2/select2.min.js"></script> <!-- Select2 Js -->
+<script src="~/assets/panel/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+<script src="~/assets/panel/js/pages/forms/advanced-form-elements.js"></script>
+
+

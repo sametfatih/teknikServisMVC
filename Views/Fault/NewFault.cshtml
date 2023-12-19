@@ -1,0 +1,183 @@
+﻿@{
+    ViewData["Title"] = "Yeni Arıza Kaydı";
+    Layout = "~/Views/Shared/PanelLayout.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.0/min/dropzone.min.css">
+
+<style>
+    .dz-preview {
+        border-radius: 20px !important;
+    }
+</style>
+
+<section class="content">
+    <div class="body_scroll">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                    <h2>Yeni Arıza Kaydı</h2>
+
+                    <button class="btn btn-primary btn-icon mobile_menu" type="button">
+                        <i class="zmdi zmdi-sort-amount-desc"></i>
+                    </button>
+                </div>
+                <div class="col-lg-5 col-md-6 col-sm-12">
+                    <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button">
+                        <i class="zmdi zmdi-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="alert alert-warning" role="alert">
+                        <strong>Uyarı !</strong> Yeni bir kayıt oluşturmadan önce müşteri kaydını kontrol edin, <a target="_blank" href="/user/allcustomers">Kontrol Et</a>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true"><i class="zmdi zmdi-close"></i></span>
+                        </button>
+                    </div>
+                    <div class="card">
+                        <div class="body">
+                            <form id="faultForm" action="/fault/newfault" method="POST" enctype="multipart/form-data">
+                                <div class="row clearfix">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <input required name="Marka" type="text" class="form-control" placeholder="Marka">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <input required name="Model" type="text" class="form-control" placeholder="Model">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <input required name="SeriNumarasi" type="text" class="form-control" placeholder="Seri Numarası">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-4">
+                                  
+                                        <label>Müşteri Email Adresi</label>
+                                        <div class="input-group masked-input mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="zmdi zmdi-email"></i></span>
+                                            </div>
+                                            <input required type="text" name="Eposta" class="form-control email"
+                                                   placeholder="Email: örnek@teknikservis.com">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <textarea style="resize:none" required name="Aciklama" rows="4" class="form-control "
+                                                          placeholder="Müşteri beyanı ve arıza açıklaması..."></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input id="trackno" type="hidden" name="ArizaTakipNumarasi"/>
+                                </div>
+                            </form>
+                            
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <div class="card">
+                                        <label>Cihaz görselleri</label>
+                                        <form action="upload.php" class="dropzone"
+                                              style="border-radius: 0.35rem !important" id="myDropzone">
+                                            <div class="fallback">
+                                                <input name="file" type="file" multiple />
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-block btn-lg btn-success">Kayıt Ekle</button>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+</section>
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        var length = 10,
+            charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+            retVal = "";
+        for (var i = 0, n = charset.length; i < length; ++i) {
+            retVal += charset.charAt(Math.floor(Math.random() * n));
+        }
+        document.getElementById("trackno").value = retVal;
+
+
+        const addButton = document.querySelector(".btn-success"); // Altta bulunan butonun sınıfını kullanarak seçiyoruz
+        const firstForm = document.querySelector("#faultForm"); // İlk formu seçiyoruz
+        //const secondForm = document.querySelector("form:nth-child(2)"); // İkinci formu seçiyoruz
+
+        addButton.addEventListener("click", function (e) {
+            e.preventDefault(); // Sayfanın yeniden yüklenmesini engelliyoruz
+
+            // Formdaki tüm inputları kontrol et
+            const inputs = firstForm.querySelectorAll('input[required]');
+            let isValid = true;
+
+            inputs.forEach(input => {
+                if (input.value.trim() === '') {
+                    isValid = false;
+                }
+            });
+
+            // Eğer tüm inputlar doluysa formu gönder
+            if (isValid) {
+                firstForm.submit();             // İlk formu gönderiyoruz
+            } else {
+                alert('Lütfen tüm zorunlu alanları doldurun.');
+            }
+
+            // secondForm.submit(); // İkinci formu gönderiyoruz
+        });
+    });
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.0/min/dropzone.min.js"></script>
+
+<script>
+    // Dropzone.js'i başlatmadan önce düğme metnini Türkçe olarak güncelleyin
+
+    Dropzone.options.myDropzone = {
+        paramName: "file", // Sunucuya gönderilecek dosyanın adı
+        maxFilesize: 5, // Dosya boyutu sınırı (MB cinsinden)
+        acceptedFiles: ".jpg, .jpeg, .png, .gif", // Kabul edilen dosya türleri
+        addRemoveLinks: true, // Dosya ekleme/kaldırma bağlantıları
+        dictRemoveFile: "Dosyayı Kaldır",
+        dictCancelUpload: "Yüklemeyi İptal Et",
+        dictDefaultMessage: "Dosyaları buraya sürükleyin veya tıklayın",
+        success: function (file, response) {
+            // Dosya yükleme işlemi başarılı olduğunda yapılacak işlemler
+            console.log(response);
+        },
+        error: function (file, response) {
+            // Dosya yükleme işlemi başarısız olduğunda yapılacak işlemler
+            console.log(response);
+        }
+    };
+
+    // Düğme metnini Türkçe olarak güncelle
+    myDropzone.on("addedfile", function (file) {
+        var dzButton = file.previewElement.querySelector(".dz-button");
+        dzButton.textContent = "Dosyaları yüklemek için buraya sürükleyin veya tıklayın";
+    });
+</script>
+<script src="~/assets/panel/plugins/jquery-inputmask/jquery.inputmask.bundle.js"></script> <!-- Input Mask Plugin Js -->
+<script src="~/assets/panel/plugins/select2/select2.min.js"></script> <!-- Select2 Js -->
+<script src="~/assets/panel/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+<script src="~/assets/panel/js/pages/forms/advanced-form-elements.js"></script>

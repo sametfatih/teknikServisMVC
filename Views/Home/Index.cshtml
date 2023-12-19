@@ -1,0 +1,632 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- landing-2.html 42:51-->
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Teknik servis uygulaması Selçuk Üniversitesi Teknoloji Fakültesi">
+    <meta name="author" content="Shreethemes">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <title>Teknik Servis - Ana Sayfa</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700|Poppins" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="~/assets/user/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Magnificpopup Css -->
+    <link rel="stylesheet" type="text/css" href="~/assets/user/css/magnific-popup.css">
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/assets/user/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="~/assets/user/css/fontawesome.css" rel="stylesheet">
+    <link href="~/assets/user/css/pe-icon-7-stroke.css" rel="stylesheet">
+
+    <!--Slider-->
+    <link rel="stylesheet" href="~/assets/user/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="~/assets/user/css/owl.theme.css" />
+    <link rel="stylesheet" href="~/assets/user/css/owl.transitions.css" />
+    <link rel="stylesheet" href="~/assets/user/css/slick.css" />
+    <link rel="stylesheet" href="~/assets/user/css/slick-theme.css" />
+
+    <!-- Custom styles for this template -->
+    <link href="~/assets/user/css/style.css" rel="stylesheet">
+    <link href="~/assets/user/css/menu-small.css" rel="stylesheet">
+    <link href="~/assets/user/css/default.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- Loader -->
+    <div id="preloader">
+        <div id="status">
+            <div class="spinner">
+                <div class="double-bounce1"></div>
+                <div class="double-bounce2"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar-->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-custom sticky sticky-dark"
+         style="box-shadow: 0 0px 10px rgba(0, 0, 0, 0.3);background-color: white!important;">
+        <div class="container">
+            <!-- LOGO -->
+            <a class="navbar-brand logo" href="/Home/Index">
+                <b style="color: black;">Teknik Servis</b>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="mdi mdi-menu"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav ml-auto navbar-center" id="mySidenav">
+                    <li class="nav-item">
+                        <a style="color: black;" href="#home" class="nav-link"><b>Anasayfa</b></a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="color: black;" href="#service" class="nav-link"><b>Hizmetler</b></a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="color: black;" href="#work" class="nav-link"><b>Markalar</b></a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a style="color: black;" href="#team" class="nav-link"><b>Ekibimiz</b></a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="color: black;" href="#contact" class="nav-link last-elements"><b>İletişim</b></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HOME START-->
+    <section class="bg-home" style="background-image: url('assets/user/images/home/bg-home-6.jpg');" id="home">
+        <div class="bg-overlay"></div>
+        <div class="home-center">
+            <div class="home-desc-center">
+                <div class="container title-perticle">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="home-registration-form bg-white p-30 rounded box-shadow">
+                                <h5 class="form-title mb-4 text-center font-weight-bold">Giriş Yap</h5>
+                                <form action="/affiliation/login" method="post" class="registration-form">
+                                    <label class="text-muted">E-posta</label>
+                                    <input type="email" id="exampleInputEmail1" name="Email"
+                                           class="form-control bg-white mb-4 registration-input-box">
+                                    <label class="text-muted">Parola</label>
+                                    <input type="password" id="exampleInputName1" name="Password"
+                                           class="form-control bg-white mb-4 registration-input-box">
+                                    <button class="btn btn-custom w-100">Giriş Yap</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-white p-30 rounded box-shadow">
+                                <h5 class="form-title mb-4 text-center font-weight-bold">Durum Sorgula</h5>
+                                <form class="login-form" action="/fault/faultstatus" method="post">
+                                    <div class="row">
+                                        <div class="col-lg-12 mt-2">
+                                            <input type="text" class="form-control" placeholder="Takip Numarası"
+                                                   name="ArizaTakipNumarasi" required>
+                                        </div>
+                                        <div class="col-lg-12 mt-4 mb-3">
+                                            <button class="btn btn-custom w-100">Sorgula</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="business-home-shape">
+                            <img src="~/assets/user/images/shape-l2.png" alt="" class="img-fluid mx-auto d-block">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- HOME END-->
+    <!-- SERVICES START -->
+    <section class="section bg-light" id="service">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-12">
+                    <div class="section-title text-center">
+                        <h3>hizmetlerimiz</h3>
+                        <div class="spacer-15"></div>
+                        <p class="text-muted mb-0">Hizmet kalitemiz ile müşteri mennuniyetimiz doğru orantılıdır.</p>
+                        <div class="spacer-30"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="service-three mt-30 p-20">
+                        <div class="service-icon">
+                            <i class="pe-7s-hourglass"></i>
+                        </div>
+                        <div class="service-head">
+                            <h4>Hızlı İşlem</h4>
+                            <p class="text-muted mb-0">Vakit kaybı olmadan hizmet.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="service-three mt-30 p-20">
+                        <div class="service-icon">
+                            <i class="pe-7s-umbrella"></i>
+                        </div>
+                        <div class="service-head">
+                            <h4>7/24 Destek</h4>
+                            <p class="text-muted mb-0">Aklınıza takılan en ufak nokta kalmasın.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="service-three mt-30 p-20">
+                        <div class="service-icon">
+                            <i class="pe-7s-smile"></i>
+                        </div>
+                        <div class="service-head">
+                            <h4>Modern Çözüm</h4>
+                            <p class="text-muted mb-0">Yenilikçi yöntemlerle esnek çözüm.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- SERVICES END -->
+    <!-- WORK START -->
+    <section class="section" id="work">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-12">
+                    <div class="section-title text-center">
+                        <p class="text-muted mb-0">Bugüne kadar yaptıklarımız, yapacaklarımızın teminatıdır.</p>
+                        <div class="spacer-30"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="container-fluid mt-30">
+            <div class="port portfolio-masonry">
+                <div class="portfolioContainer row">
+                    <div class="col-lg-3 col-md-6 natural personal p-0">
+                        <div class="portfolio-box mt-0 mb-0" style="height: 12em;display: flex; flex-direction: column; justify-content: center;
+                            align-items: center;">
+                            <img style="height: 40%;"
+                                 src="https://i.pinimg.com/originals/a9/39/7d/a9397d120bfea4478821815859b6ba40.png"
+                                 class="img-fluid" alt="member-image">
+
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 natural personal p-0">
+                        <div class="portfolio-box mt-0 mb-0" style="height: 12em;display: flex; flex-direction: column; justify-content: center;
+                            align-items: center;">
+                            <img style="height: 30%;"
+                                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Dell_Logo.png/799px-Dell_Logo.png"
+                                 class="img-fluid" alt="member-image">
+
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 natural personal p-0">
+                        <div class="portfolio-box mt-0 mb-0" style="height: 12em;display: flex; flex-direction: column; justify-content: center;
+                            align-items: center;">
+                            <img style="height: 100%;"
+                                 src="https://m.media-amazon.com/images/S/stores-image-uploads-eu-prod/b/AmazonStores/A33AVAJ2PDY3EV/c568204c809a7f73dadb160fbf22f025.w400.h400.png"
+                                 class="img-fluid" alt="member-image">
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 natural personal p-0">
+                        <div class="portfolio-box mt-0 mb-0" style="height: 12em;display: flex; flex-direction: column; justify-content: center;
+                            align-items: center;">
+                            <img style="height: 60%;"
+                                 src="https://seeklogo.com/images/H/Huawei-logo-A8C7CBCAA8-seeklogo.com.png"
+                                 class="img-fluid" alt="member-image">
+
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 natural personal p-0">
+                        <div class="portfolio-box mt-0 mb-0" style="height: 12em;display: flex; flex-direction: column; justify-content: center;
+                            align-items: center;">
+                            <img style="height: 100%;"
+                                 src="https://logodownload.org/wp-content/uploads/2014/09/lenovo-logo-0.png"
+                                 class="img-fluid" alt="member-image">
+
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 natural personal p-0">
+                        <div class="portfolio-box mt-0 mb-0" style="height: 12em;display: flex; flex-direction: column; justify-content: center;
+                            align-items: center;">
+                            <img style="height: 100%;" src="https://static.cdnlogo.com/logos/m/21/msi.png"
+                                 class="img-fluid" alt="member-image">
+
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 natural personal p-0">
+                        <div class="portfolio-box mt-0 mb-0" style="height: 12em;display: flex; flex-direction: column; justify-content: center;
+                            align-items: center;">
+                            <img style="height: 100%;"
+                                 src="https://static.vecteezy.com/system/resources/previews/021/671/838/original/acer-logo-transparent-free-png.png"
+                                 class="img-fluid" alt="member-image">
+
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 natural personal p-0">
+                        <div class="portfolio-box mt-0 mb-0" style="height: 12em;display: flex; flex-direction: column; justify-content: center;
+                            align-items: center;">
+                            <img style="height: 80%;"
+                                 src="https://upload.wikimedia.org/wikipedia/commons/6/6f/HP_logo_630x630.png"
+                                 class="img-fluid" alt="member-image">
+
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end portfoliocontainer-->
+            </div>
+        </div>
+    </section>
+    <!-- WORK END -->
+    <!-- TEAM START -->
+    <section class="section" id="team">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-12">
+                    <div class="section-title text-center">
+                        <h3>ekibimiz</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="team-box mt-30">
+                        <div class="team-box-img">
+                            <img src="~/assets/user/images/team/hmk.jpg" alt="" class="img-fluid">
+                        </div>
+                        <div class="team-info text-center">
+                            <h3 class="mb-0">Hasan Musa KOÇAK</h3>
+                            <small class="text-muted">Backend Developer</small>
+                        </div>
+                        <div class="team-members-overlay">
+                            <div class="text-center mt-2">
+                                <ul class="list-unstyled team-icon">
+                                    <li class="list-inline-item"><a href="#"><i class="fab fa-apple"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="team-box mt-30">
+                        <div class="team-box-img">
+                            <img src="~/assets/user/images/team/sfg.jpg" alt="" class="img-fluid">
+                        </div>
+                        <div class="team-info text-center">
+                            <h3 class="mb-0">Samet Fatih GÖZÜM</h3>
+                            <small class="text-muted">Backend Developer</small>
+                        </div>
+                        <div class="team-members-overlay">
+                            <div class="text-center mt-2">
+                                <ul class="list-unstyled team-icon">
+                                    <li class="list-inline-item"><a href="#"><i class="fab fa-apple"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="team-box mt-30">
+                        <div class="team-box-img">
+                            <img src="~/assets/user/images/team/firat.jpg" alt="" class="img-fluid">
+                        </div>
+                        <div class="team-info text-center">
+                            <h3 class="mb-0">Fırat YILMAZ</h3>
+                            <small class="text-muted">Backend Developer</small>
+                        </div>
+                        <div class="team-members-overlay">
+                            <div class="text-center mt-2">
+                                <ul class="list-unstyled team-icon">
+                                    <li class="list-inline-item"><a href="#"><i class="fab fa-apple"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="team-box mt-30">
+                        <div class="team-box-img">
+                            <img src="~/assets/user/images/team/emre.jpg" alt="" class="img-fluid">
+                        </div>
+                        <div class="team-info text-center">
+                            <h3 class="mb-0">Yunus Emre ÇOBAN</h3>
+                            <small class="text-muted">Project Manager</small>
+                        </div>
+                        <div class="team-members-overlay">
+                            <div class="text-center mt-2">
+                                <ul class="list-unstyled team-icon">
+                                    <li class="list-inline-item"><a href="#"><i class="fab fa-apple"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="justify-content: center;">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="team-box mt-30">
+                            <div class="team-box-img">
+                                <img src="~/assets/user/images/team/batuhan.jpg" alt="" class="img-fluid">
+                            </div>
+                            <div class="team-info text-center">
+                                <h3 class="mb-0">Batuhan ULUTÜRK</h3>
+                                <small class="text-muted">Database Manager</small>
+                            </div>
+                            <div class="team-members-overlay">
+                                <div class="text-center mt-2">
+                                    <ul class="list-unstyled team-icon">
+                                        <li class="list-inline-item"><a href="#"><i class="fab fa-apple"></i></a></li>
+                                        <li class="list-inline-item">
+                                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="#"><i class="fab fa-instagram"></i></a>
+                                        </li>
+                                        <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="team-box mt-30">
+                            <div class="team-box-img">
+                                <img src="~/assets/user/images/team/atalay.jpg" alt="" class="img-fluid">
+                            </div>
+                            <div class="team-info text-center">
+                                <h3 class="mb-0">Musa ATALAY</h3>
+                                <small class="text-muted">Frontend Developer</small>
+                            </div>
+                            <div class="team-members-overlay">
+                                <div class="text-center mt-2">
+                                    <ul class="list-unstyled team-icon">
+                                        <li class="list-inline-item"><a href="#"><i class="fab fa-apple"></i></a></li>
+                                        <li class="list-inline-item">
+                                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="#"><i class="fab fa-instagram"></i></a>
+                                        </li>
+                                        <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="team-box mt-30">
+                            <div class="team-box-img">
+                                <img src="~/assets/user/images/team/mcicek.jpg" alt="" class="img-fluid">
+                            </div>
+                            <div class="team-info text-center">
+                                <h3 class="mb-0">Mustafa ÇİÇEK</h3>
+                                <small class="text-muted">Frontend Developer</small>
+                            </div>
+                            <div class="team-members-overlay">
+                                <div class="text-center mt-2">
+                                    <ul class="list-unstyled team-icon">
+                                        <li class="list-inline-item"><a href="#"><i class="fab fa-apple"></i></a></li>
+                                        <li class="list-inline-item">
+                                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="#"><i class="fab fa-instagram"></i></a>
+                                        </li>
+                                        <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- TEAM END -->
+    <!-- CONTACT START -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-12">
+                    <div class="section-title text-center">
+                        <h3>iletişime geçin</h3>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="map video-app-box mt-30">
+                        <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Sel%C3%A7uk%20%C3%9Cniversitesi%20Teknoloji%20Fak%C3%BCltesi+(Selcuk%20Universitesi)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+                    </div>
+                </div>
+                <!-- col end -->
+                <div class="col-md-6">
+                    <div class="custom-form mt-30">
+                        <div id="message"></div>
+                        <form method="post" action="https://alita.netlify.com/layouts/php/contact.php"
+                              name="contact-form" id="contact-form">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group app-label">
+                                        <input name="name" id="name" type="text" class="form-control"
+                                               placeholder="Adınız :">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group app-label">
+                                        <input name="email" id="email" type="email" class="form-control"
+                                               placeholder="E-posta :">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group app-label">
+                                        <input name="subject" id="subject" class="form-control" placeholder="Konu :">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group app-label">
+                                        <textarea name="comments" id="comments" rows="3" class="form-control"
+                                                  placeholder="Mesajınız :"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <input style="margin-top:2em" type="submit" id="submit" name="send" class="submitBnt btn btn-custom w-100"
+                                           value="Mesajı Gönder">
+                                    <div id="simple-msg"></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-lg-5 mt-md-3 mt-sm-30">
+                <div class="col-lg-3 col-md-6">
+                    <div class="contact-details text-center mt-30 p-20">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="spacer-15"></div>
+                        <div class="contact-head">
+                            <p class="mb-0 info-title">Konum</p>
+                            <p class="mb-0">Selçuklu, Konya 42100</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="contact-details text-center mt-30 p-20">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="spacer-15"></div>
+                        <div class="contact-head">
+                            <p class="mb-0 info-title">E-Posta</p>
+                            <p class="mb-0">teknikservis@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="contact-details text-center mt-30 p-20">
+                        <div class="contact-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="spacer-15"></div>
+                        <div class="contact-head">
+                            <p class="mb-0 info-title">Web Adresi</p>
+                            <p class="mb-0">www.teknikservis.com</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="contact-details text-center mt-30 p-20">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="spacer-15"></div>
+                        <div class="contact-head">
+                            <p class="mb-0 info-title">İletişim Numarası</p>
+                            <p class="mb-0">555-123-1234</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- CONTACT END -->
+    <!-- Back to top -->
+    <a href="#" class="back-to-top" id="back-to-top">
+        <i class="mdi mdi-chevron-up"> </i>
+    </a>
+    <!-- Back to top -->
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="~/assets/user/js/jquery.min.js"></script>
+    <script src="~/assets/user/js/popper.min.js"></script>
+    <script src="~/assets/user/js/bootstrap.min.js"></script>
+    <script src="~/assets/user/js/scrollspy.min.js"></script>
+    <!-- easing -->
+    <script src="~/assets/user/js/jquery.easing.min.js"></script>
+    <!-- Portfolio -->
+    <script src="~/assets/user/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/assets/user/js/isotope.js"></script>
+    <script src="~/assets/user/js/portfolio-filter.js"></script>
+    <!-- Carousel -->
+    <script src="~/assets/user/js/owl.carousel.min.js"></script>
+    <script src="~/assets/user/js/owlcarousel.init.js"></script>
+    <script src="~/assets/user/js/slick.min.js"></script>
+    <script src="~/assets/user/js/slick.init.js"></script>
+    <!-- COUNTER -->
+    <script src="~/assets/user/js/counter.init.js"></script>
+    <!-- VIDEO ICON -->
+    <script src="~/assets/user/js/magnific.init.js"></script>
+    <!-- CONTACT -->
+    <script src="~/assets/user/js/contact.js"></script>
+    <!--custom script-->
+    <script src="~/assets/user/js/app.js"></script>
+</body>
+
+
+<!-- landing-2.html 42:52-->
+
+</html>

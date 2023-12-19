@@ -1,0 +1,112 @@
+﻿@using teknikServisMVC.Models.Entities.Concrete;
+@{
+    ViewData["Title"] = "Arıza Durumları";
+    Layout = "~/Views/Shared/PanelLayout.cshtml";
+}
+
+@model ICollection<ArizaDurumu>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.0/min/dropzone.min.css">
+<link rel="stylesheet" href="~/assets/panel/plugins/select2/select2.css">
+
+<section class="content">
+    <div class="body_scroll">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                    <h2>Arıza Durumları</h2>
+
+                    <button class="btn btn-primary btn-icon mobile_menu" type="button">
+                        <i class="zmdi zmdi-sort-amount-desc"></i>
+                    </button>
+                </div>
+                <div class="col-lg-5 col-md-6 col-sm-12">
+                    <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button">
+                        <i class="zmdi zmdi-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="body">
+                            <div class="row clearfix">
+                                <div class="col-sm-5">
+                                    <form action="/faultstatus/createfaultstatus" method="post">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Durum Adı</label>
+                                            <div class="col-sm-9">
+                                                <input name="Ad" type="text" class="form-control" required />
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <button type="submit" class="btn btn-block btn-lg btn-info">Durum Ekle</button>
+                                </div>
+                                <div class="col-sm-7">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Durum Adı</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Model != null)
+                                                {
+                                                    @foreach (var faultStatus in Model)
+                                                    {
+                                                        <tr>
+                                                            <td>@faultStatus.Id</td>
+                                                            <td>@faultStatus.Ad</td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const addButton = document.querySelector(".btn-info");
+        const firstForm = document.querySelector("form:first-child");
+
+        addButton.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            // Formdaki tüm inputları kontrol et
+            const inputs = firstForm.querySelectorAll('input[required]');
+            let isValid = true;
+
+            inputs.forEach(input => {
+                if (input.value.trim() === '') {
+                    isValid = false;
+                }
+            });
+
+            // Eğer tüm inputlar doluysa formu gönder
+            if (isValid) {
+                firstForm.submit();
+            } else {
+                alert('Lütfen tüm zorunlu alanları doldurun.');
+            }
+        });
+    });
+</script>
+
+
+<script src="~/assets/panel/plugins/jquery-inputmask/jquery.inputmask.bundle.js"></script> <!-- Input Mask Plugin Js -->
+<script src="~/assets/panel/plugins/select2/select2.min.js"></script> <!-- Select2 Js -->
+<script src="~/assets/panel/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+<script src="~/assets/panel/js/pages/forms/advanced-form-elements.js"></script>

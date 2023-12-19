@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewData["Title"] = "İşlemdeki Arıza Kayıtları";
+    Layout = "~/Views/Shared/PanelLayout.cshtml";
+}
+@model Tuple<object,List<object>,string>
+
+<link rel="stylesheet" href="~/assets/panel/plugins/jquery-datatable/dataTables.bootstrap4.min.css">
+
+<section class="content">
+        <div class="body_scroll">
+            <div class="block-header">
+                <div class="row">
+                    <div class="col-lg-7 col-md-6 col-sm-12">
+                        <h2>İşlemdeki Arıza Kayıtları</h2>
+
+                        <button class="btn btn-primary btn-icon mobile_menu" type="button"><i
+                                class="zmdi zmdi-sort-amount-desc"></i></button>
+                    </div>
+                    <div class="col-lg-5 col-md-6 col-sm-12">
+                        <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i
+                                class="zmdi zmdi-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row clearfix">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="body">
+                                <div class="table-responsive">
+                                @await Component.InvokeAsync("DynamicTable",Model)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+
+
+<!-- Jquery DataTable Plugin Js -->
+<script src="~/assets/panel/bundles/datatablescripts.bundle.js"></script>
+<script src="~/assets/panel/plugins/jquery-datatable/buttons/buttons.bootstrap4.min.js"></script>
+<script src="~/assets/panel/plugins/jquery-datatable/buttons/buttons.colVis.min.js"></script>
+<script src="~/assets/panel/plugins/jquery-datatable/buttons/buttons.flash.min.js"></script>
+<script src="~/assets/panel/plugins/jquery-datatable/buttons/buttons.html5.min.js"></script>
+<script src="~/assets/panel/plugins/jquery-datatable/buttons/buttons.print.min.js"></script>
+<script src="~/assets/panel/js/pages/tables/jquery-datatable.js"></script>

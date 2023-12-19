@@ -1,0 +1,229 @@
+﻿@using System.Text;
+@using teknikServisMVC.Models.Entities.Abstract;
+@using teknikServisMVC.Models.Entities.Concrete;
+@using teknikServisMVC.ViewComponents;
+
+@{
+    //dynamic button and prop listing algorithm
+}
+
+@model Tuple<object, List<object>,string>
+
+<link rel="stylesheet" href="~/assets/panel/plugins/jquery-datatable/dataTables.bootstrap4.min.css" />
+
+@{
+    //base entity indexer - prop list w/ ids - counter
+
+    var base_entities_index = new List<int>();
+    var ct = 0;
+    var prop_list_withoutIds = Model.Item1.GetType().GetProperties().Where(a => !a.Name.Contains("Id") && a.PropertyType.BaseType?.Name != null && !a.Name.Contains("ArizaDurumu"));
+
+    //etc typeof(BaseEntity)
+    if (Model.Item1 != null && Model.Item1.GetType().BaseType == typeof(BaseEntity))
+    {
+        <table class="@Model.Item3.ToString()">
+            <thead>
+                <tr>
+                    @foreach (var item in TableHeader.Get(@Model.Item1.GetType().Name))
+                    {
+                        ct++;
+                        if (TableHeader.entity_names.Contains(item))
+                        {
+                            <th>@item</th>
+                            base_entities_index.Add(ct);
+                            continue;
+                        }
+                        <th>@item</th>
+                    }
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var list_items in Model.Item2)
+                {
+                    int objId = (int)list_items.GetType()?.GetProperty("Id")?.GetValue(list_items, null);
+                    string hrefName = list_items.GetType().Name.ToString();
+                    var counter = 0;
+                    int length = 0;
+                    <tr>
+                        @{
+                            List<int> countlist = new List<int>();
+                            countlist.AddRange(Enumerable.Range(1, prop_list_withoutIds.Count()));
+
+                            //comparison beetwen indexes and total property count.
+                            //total properties are indexed 1 to count of property list.
+                            //While indexes are equal, algoritm puts a button which one can call ModalBox.
+
+
+                            foreach (var item in countlist)
+                            {
+                                StringBuilder sb = new StringBuilder();
+                                string ModalboxName = Model.Item1.GetType().GetProperties().Where(a => !a.Name.Contains("Id")).ElementAt(item - 1).PropertyType.Name;
+
+                                if (base_entities_index.Contains(item))
+                                {
+                                    length = TableHeader.Get(ModalboxName).Except(TableHeader.entity_names).ToArray().Length;
+
+                                    @foreach (var derivated_entity_props in Model.Item1.GetType().GetProperties().Where(a => !a.Name.Contains("Id")).ElementAt(item - 1).PropertyType.GetProperties())
+                                    {
+
+                                        sb.Append("<tr>");
+                                        if (!derivated_entity_props.Name.Contains("Id"))
+                                        {
+                                            if (derivated_entity_props.PropertyType.BaseType?.Name == "BaseEntity" || derivated_entity_props.PropertyType.BaseType?.Name == null)
+                                            { continue; };
+
+                                            if (list_items.GetType().GetProperty(prop_list_withoutIds.ElementAt(item - 1).Name)?.
+                                            GetValue(list_items, null)?.GetType().GetProperty(derivated_entity_props.Name)?.
+                                            GetValue(list_items.GetType().GetProperty(prop_list_withoutIds.ElementAt(item - 1).Name)?.
+                                            GetValue(list_items, null), null)?.ToString() == "1.01.0001 00:00:00")
+                                            {
+                                                sb.Append("<th>");
+                                                sb.Append("<b style=\"color:#E47297\">" + TableHeader.Get(ModalboxName).Except(TableHeader.entity_names).ToArray()[counter] + "</b> : " + "<b style=\"color:gray\">" +
+                                                "-"
+                                                + "</b>");
+                                                sb.Append("</th>");
+                                            }
+                                            else
+                                            {
+                                                sb.Append("<th>");
+                                                sb.Append("<b style=\"color:#E47297\">" + TableHeader.Get(ModalboxName).Except(TableHeader.entity_names).ToArray()[counter] + "</b> : " + "<b style=\"color:gray\">" +
+                                                @list_items.GetType().GetProperty(prop_list_withoutIds.ElementAt(item - 1).Name)?.
+                                                GetValue(list_items, null)?.GetType().GetProperty(derivated_entity_props.Name)?.
+                                                GetValue(list_items.GetType().GetProperty(prop_list_withoutIds.ElementAt(item - 1).Name)?.
+                                                GetValue(list_items, null), null) + "</b>");
+                                                sb.Append("</th>");
+                                            }
+
+                                            counter++;
+                                        }
+                                        sb.Append("</tr>");
+                                    }
+                                    counter = 0;
+                                    <td style="vertical-align:middle">
+                                        <button style="background-color:#E47297 !important" onclick="ModalCreate('@sb.ToString()');" data-color type="button" class="btn btn-deAriza waves-effect m-r-20" data-toggle="modal" data-target="#exampleModal">GÖSTER</button>
+                                    </td>
+                                }
+                                else
+                                {
+                                    if (@list_items.GetType().GetProperty(prop_list_withoutIds.ElementAt(item - 1).Name)?.GetValue(list_items, null)?.ToString() == "1.01.0001 00:00:00")
+                                    {
+                                        <td style="vertical-align:middle"><b>Güncelleme Yapılmadı</b></td>
+                                        continue;
+                                    }
+                                    if (@list_items.GetType().GetProperty(prop_list_withoutIds.ElementAt(item - 1).Name)?.GetValue(list_items, null)?.ToString() == "True")
+                                    {
+                                        <td style="vertical-align:middle"><span class="badge badge-success"><a href="/@TableHeader.UrlId(Model.Item1.GetType().Name.ToString())/StatusChange/@objId/">Pasif Yap</a></span></td>
+                                        continue;
+
+                                    }
+                                    if (@list_items.GetType().GetProperty(prop_list_withoutIds.ElementAt(item - 1).Name)?.GetValue(list_items, null)?.ToString() == "False")
+                                    {
+                                        <td style="vertical-align:middle"><span class="badge badge-danger"><a href="/@TableHeader.UrlId(Model.Item1.GetType().Name.ToString())/StatusChange/@objId/">Aktif Yap</a></span></td>
+                                        continue;
+
+                                    }
+                                    else
+                                    {
+                                        <td style="vertical-align:middle"><b>@list_items.GetType().GetProperty(prop_list_withoutIds.ElementAt(item-1).Name)?.GetValue(list_items,null)?.ToString()</b></td>
+                                    }
+                                }
+                            }
+                            <td style="vertical-align:middle">
+                                @{
+                                    if (Model.Item1.GetType() != typeof(Ariza))
+                                    {
+                                        <a class="btn btn-info btn-icon btn-icon-mini btn-round" href="/@TableHeader.UrlId(Model.Item1.GetType().Name.ToString())/Update/@objId/"><i class="zmdi zmdi-long-arrow-up"></i></a>
+
+                                    }
+                                    if (Model.Item1.GetType() == typeof(Ariza) && (int)list_items.GetType().GetProperty("ArizaDurumu").GetValue(list_items, null).GetType().GetProperty("Id").GetValue(list_items.GetType().GetProperty("ArizaDurumu").GetValue(list_items, null), null) != 5)
+                                    {
+                                        string stat = list_items.GetType().GetProperty("ArizaDurumu").GetValue(list_items, null).GetType().GetProperty("Ad").GetValue(list_items.GetType().GetProperty("ArizaDurumu").GetValue(list_items, null), null).ToString();
+                                        <span class="badge badge-info"><a href="/@TableHeader.UrlId(Model.Item1.GetType().Name.ToString())/StatusUpdate/@objId/">Mevcut Durum: @stat<i class="zmdi zmdi-redo"></i></a></span>
+                                    }
+                                    else
+                                    {
+                                        if (Model.Item1.GetType() == typeof(Ariza))
+                                        {
+                                            <span class="badge badge-success">Sonuçlanmış</span>
+                                        }
+
+                                    }
+                                }
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div style="text-align:center" class="my-modal-header">
+                <h3 class="modal-title fs-5" id="ModalLabel"></h3>
+            </div>
+            <div id="ModalBody" class="modal-body">
+                <table id="modalTable" class="table">
+                </table>
+            </div>
+            <div class="modal-footer align-items-center justify-content-center">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">X</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    function ModalCreate(tabledata) {
+        document.getElementById("ModalLabel").innerHTML = "</ins> Bilgi Sayfası</b>";
+        document.getElementById("modalTable").innerHTML = tabledata;
+    }
+</script>
+
+<style>
+    a {
+        color: white;
+        text-decoration: none; /* Alt çizgiyi kaldırır */
+    }
+
+        /* Üzerine gelindiğinde bağlantı rengi */
+        a:hover {
+            color: white;
+        }
+
+        /* Tıklandığında bağlantı rengi */
+        a:active {
+            color: white;
+        }
+
+    .my-modal-header {
+        text-align: center;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1rem;
+        border-bottom: 1px solid #dee2e6;
+        border-top-left-radius: calc(0.3rem - 1px);
+        border-top-right-radius: calc(0.3rem - 1px);
+    }
+
+    table {
+        text-align: center;
+    }
+
+    #modalTable th {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    td {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+</style>

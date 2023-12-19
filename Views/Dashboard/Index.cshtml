@@ -1,0 +1,80 @@
+﻿@using teknikServisMVC.Models.ViewModels;
+
+@{
+    ViewData["Title"] = "Yönetici Paneli";
+    Layout = "~/Views/Shared/PanelLayout.cshtml";
+}
+@model DashboardViewModel
+
+<section class="content">
+    <div class="body_scroll">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                    <h2>Dashboard</h2>
+
+                    <button class="btn btn-primary btn-icon mobile_menu" type="button">
+                        <i class="zmdi zmdi-sort-amount-desc"></i>
+                    </button>
+                </div>
+                <div class="col-lg-5 col-md-6 col-sm-12">
+                    <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button">
+                        <i class="zmdi zmdi-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row clearfix">
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="card widget_2 big_icon chart">
+                        <div class="body">
+                            <h6 style="z-index: 1;position: relative;">Toplam Arıza Sayısı</h6>
+                            <h2 class="text-warning">@Model.ToplamArizaSayisi <small class="info">Arıza</small></h2>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="card widget_2 big_icon chart">
+                        <div class="body">
+                            <h6 style="z-index: 1;position: relative;">
+                                Sonuçlanan Arıza Sayısı
+                            </h6>
+                            <h2 class="text-danger">@Model.ToplamSonuclanan <small class="info">Arıza</small></h2>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="card widget_2 big_icon chart">
+                        <div class="body">
+                            <h6 style="z-index: 1;position: relative;">Servisteki Cihaz Sayısı</h6>
+                            <h2 class="text-success">@Model.ToplamCihaz <small class="info">Adet</small></h2>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="card widget_2 big_icon chart">
+                        <div class="body">
+                            <h6 style="z-index: 1;position: relative;">Kargodaki Cihaz Sayısı</h6>
+                            <h2 class="text-info">@Model.ToplamKargo <small class="info">Adet</small></h2>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row clearfix">
+               @await Html.PartialAsync("../Fault/LastFaults.cshtml",Model.SonArizalar)
+               @await Html.PartialAsync("../Fault/LastUpdates.cshtml",Model.SonGuncellenenler)
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    setInterval(function () {
+        location.reload();
+    }, 30000);
+</script>

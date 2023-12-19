@@ -1,0 +1,43 @@
+﻿@using teknikServisMVC.Models.Entities.Concrete;
+@model ICollection<Ariza>;
+
+<div class="col-lg-6 col-md-6 col-sm-6">
+    <div class="card">
+        <div class="header">
+            <h2><strong>*En Son</strong> Yapılan işlemler</h2>  
+        </div>
+        <div class="body">
+            <p>En son yapılan işlemler tablosu.</p>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Müşteri</th>
+                            <th>Marka</th>
+                            <th>Cihaz Modeli</th>
+                            <th>Durum</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            @foreach (var fault in Model)
+                            {
+                                <tr>
+                                    <th scope="row">@fault.Id</th>
+                                    <td>@fault.Musteri.Ad@fault.Musteri.Soyad</td>
+                                    <td>@fault.Cihaz.Marka</td>
+                                    <td>@fault.Cihaz.Model</td>
+                                    <td>
+                                        <span class="badge badge-info">@fault.ArizaDurumu.Ad</span>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
