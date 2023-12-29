@@ -33,7 +33,15 @@ namespace teknikServisMVC.Controllers
             else
                 return StatusCode(500);
         }
+        [HttpGet()]
+        public async Task<IActionResult> UpdateAsync(int id)
+        {
 
+            Musteri customer = await musteriRepository.GetByIdAsync(id);
+
+            return View(customer);
+        }
+        [HttpPost]
         public async Task<IActionResult> Update([FromForm] Musteri updateCustomer)
         {
             Musteri customer = await musteriRepository.GetByIdAsync(updateCustomer.Id);
@@ -70,22 +78,7 @@ namespace teknikServisMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateCustomer(CustomerCreateViewModel model)
         {
-            //kullanıcı adını türkçe karakterlerden arındırma
-            string ConvertTurkishToEnglish(string input)
-            {
-                input = input.Replace(" ", "");
 
-                string normalizedString = input.Normalize(NormalizationForm.FormD);
-                StringBuilder stringBuilder = new StringBuilder();
-
-                foreach (char c in normalizedString)
-                {
-                    if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
-                        stringBuilder.Append(c);
-                }
-
-                return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
-            }
 
             Musteri musteri = new()
             {

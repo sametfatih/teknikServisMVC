@@ -49,9 +49,7 @@ namespace teknikServisMVC.Repositories
             var query = Table.AsQueryable();
             if (!tracking)
                 query = Table.AsNoTracking();
-#pragma warning disable CS8603 // Possible null reference return.
             return await query.FirstOrDefaultAsync(e => e.Id == id);
-#pragma warning restore CS8603 // Possible null reference return.
         }
         public async Task<bool> AddAsync(T model)
         {
